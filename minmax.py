@@ -1,7 +1,7 @@
 from tictactoe import game_status, position_taken
 
 
-def minmax(board, players, depth, maximizing):
+def minmax(board, players, depth, maximizing, alpha = float('-inf'), beta = float('inf')):
     # For the status
     GAME_OVER = 0
     GAME_RESULTS = 1
@@ -26,11 +26,16 @@ def minmax(board, players, depth, maximizing):
         for x in range(3):
             if not position_taken(board, x, y):
                 board[y][x] = players[AI if maximizing else PLAYER]
-                score = minmax(board, players, depth + 1, not maximizing)
+                score = minmax(board, players, depth + 1, not maximizing, alpha, beta)
                 board[y][x] = ' '
                 if maximizing:
                     bestScore = max(score, bestScore)
+                    alpha = max(alpha, score)
                 else:
                     bestScore = min(score, bestScore)
+                    beta = min(beta, score)
+                    
+                if beta <= alpha:
+                    return bestScore
 
     return bestScore
