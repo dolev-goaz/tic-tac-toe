@@ -50,7 +50,14 @@ def get_position_index(board, player):
     system('cls')
     print('Insert index for player {}'.format(player))
     print_board(board)
-    index = int(input())
+    user_input = input()
+    while not user_input.isdigit() or int(user_input) not in [i for i in range(0, 10)]:
+        system('cls')
+        print('Insert index for player {}'.format(player))
+        print_board(board)
+        print('Index needs to be numeric, in the range 0-9!')
+        user_input = input()
+    index = int(user_input)
     x, y = index_to_coordinates(index)
     while position_taken(board, x, y):
         print('That position is taken!')
