@@ -51,7 +51,7 @@ def get_position_index(board, player):
     print('Insert index for player {}'.format(player))
     print_board(board)
     user_input = input()
-    while not user_input.isdigit() or int(user_input) not in [i for i in range(0, 10)]:
+    while not user_input.isdigit() or int(user_input) not in range(0, 10):
         system('cls')
         print('Insert index for player {}'.format(player))
         print_board(board)
